@@ -1,6 +1,8 @@
 let express = require('express');
 let router = express.Router();
 
+marketplaceRouter = express.Router({mergeParams: true});
+
 const pavelPizzas = [
     {
         'name': 'Пепперони',
@@ -61,9 +63,14 @@ const pavelPizzas = [
 ]
 
 /* GET users listing. */
-router.get('/get', function(req, res, next) {
+router.get('/', (req, res, next) => {
 
-    res.send("<h1>" + req.query.name + "</h1>");
+    res.send("<h1>Welcome to ITED-course API!</h1>");
+});
+router.use('/marketplace', marketplaceRouter);
+
+marketplaceRouter.use('/', (req, res) => {
+    res.send("<h1>Welcome to Marketplace!</h1>");
 });
 
 module.exports = router;
